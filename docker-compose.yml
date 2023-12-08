@@ -1,0 +1,17 @@
+version: '3'
+
+services:
+  express-typescript-prisma-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: express-typescript-prisma-app
+    volumes:
+      - .:/usr/src/app
+    working_dir: /usr/src/app
+    environment:
+      - REDIS_QUEUE_HOST=redis
+      - MONGOOSE_URL=mongodb://mongo:27017/express_typescript_prisma_mongoose
+    command: sh -c "npm install && npm run dev"
+    ports:
+      - 3000:3000
