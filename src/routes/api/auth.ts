@@ -1,5 +1,8 @@
 import { Router, Request, Response } from "express";
 import { PrismaClient } from "@prisma/client";
+import { jwtGenerate, jwtRefreshTokenGenerate } from "../../lib/jwt";
+import authMiddleware from "../../middleware/auth.middleware";
+import RequestWithUser from "../../interfaces/requestWithUser.interface";
 
 const prisma = new PrismaClient();
 
@@ -40,20 +43,41 @@ router.post("/login", async (req: Request, res: Response) => {
     return;
   }
 
+  /**
+   * Create token with jwt
+   */
+  const token = jwtGenerate(user);
+
+  /**
+   * Create refresh token
+   */
+  const refreshToken = jwtRefreshTokenGenerate(user);
+
   res.status(200).json({
     status: "success",
     userInfo: user,
+    access_token: token,
+    refresh_token: refreshToken,
   });
 });
 
-router.post("/verify", (req: Request, res: Response) => {
-  res.json({
-    status: "success",
-    message: "verify successfully",
-  });
-});
+router.post(
+  "/verify",
+  authMiddleware,
+  (request: RequestWithUser, res: Response) => {
+    /**
+     * if authMiddleware pass
+     * return 200 && json message
+     */
+    const user = request.user;
+    res.json({
+      status: "success",
+      userInfo: user,
+    });
+  }
+);
 
-router.post("/logout", (req: Request, res: Response) => {
+router.post("/logout", authMiddleware, (req: Request, res: Response) => {
   res.json({
     status: "success",
     message: "logout successfully",

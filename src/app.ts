@@ -1,4 +1,5 @@
 import express, { Express, Request, Response } from "express";
+import "express-async-errors";
 import dotenv from "dotenv";
 dotenv.config();
 import bodyParser from "body-parser";
@@ -67,7 +68,23 @@ app.get("/", (req: Request, res: Response) => {
  * not found handler
  */
 app.use("*", (req: Request, res: Response) => {
-  res.status(404).send("Not Found");
+  res.status(404).json({
+    status: `error`,
+    message: `Not found`,
+  });
+});
+
+/**
+ * init express-async-errors
+ */
+app.use((err: any, req: Request, res: Response, next: any) => {
+  if (err) {
+    res.status(err.status || 500).json({
+      status: `error`,
+      message: err.message,
+    });
+  }
+  next();
 });
 
 app.listen(PORT, () => {
