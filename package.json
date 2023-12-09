@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node src/app.ts",
     "dev": "concurrently \"tsc -w\" \"nodemon -q src/app.ts\" ",
-    "build": "npx tsc"
+    "build": "npx tsc -p ."
   },
   "keywords": [
     "express",
