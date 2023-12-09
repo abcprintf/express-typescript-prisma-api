@@ -1,6 +1,7 @@
 import express, { Express, Request, Response } from "express";
 import dotenv from "dotenv";
 dotenv.config();
+import bodyParser from "body-parser";
 
 import morganMiddleware from "./config/morganMiddleware";
 import apiAuthRouters from "./routes/api/auth";
@@ -31,6 +32,12 @@ app.use(
 );
 app.use(cors(getCorsOptions()));
 app.use(express.json());
+
+/**
+ * bodyParser
+ */
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 
 /**
  * init Logger
