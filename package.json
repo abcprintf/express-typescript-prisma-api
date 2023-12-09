@@ -1,15 +1,20 @@
 {
-  "name": "express-typescript-prisma",
+  "name": "express-typescript-prisma-api",
   "version": "1.0.0",
-  "description": "",
+  "description": "Express Typescript Prisma API",
   "main": "src/app.ts",
   "scripts": {
     "start": "node src/app.ts",
     "dev": "concurrently \"tsc -w\" \"nodemon -q src/app.ts\" ",
     "build": "npx tsc"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": [
+    "express",
+    "typescript",
+    "prisma",
+    "API"
+  ],
+  "author": "abcprintf",
   "license": "ISC",
   "dependencies": {
     "@prisma/client": "^5.7.0",
@@ -29,5 +34,8 @@
     "nodemon": "^3.0.2",
     "prisma": "^5.7.0",
     "typescript": "^5.3.3"
+  },
+  "engines": {
+    "node": ">=16.13.0"
   }
 }
