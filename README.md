@@ -1,1 +1,1 @@
-## Express + Typescript + Prisma
+## Express + Typescript + Prisma API
