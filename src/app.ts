@@ -4,6 +4,7 @@ dotenv.config();
 
 import morganMiddleware from "./config/morganMiddleware";
 import apiAuthRouters from "./routes/api/auth";
+import path from "path";
 
 const app: Express = express();
 const port = process.env.APP_PORT;
@@ -14,12 +15,17 @@ const port = process.env.APP_PORT;
 app.use(morganMiddleware);
 
 /**
+ * static files
+ */
+app.use(express.static(path.join(__dirname, "../public")));
+
+/**
  * init routers
  */
 app.use("/api/auth", apiAuthRouters);
 
 app.get("/", (req: Request, res: Response) => {
-  res.send("Express + Typescript + Prisma Server");
+  res.sendFile(__dirname + "/../public/index.html");
 });
 
 app.listen(port, () => {
