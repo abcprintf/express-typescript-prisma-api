@@ -1,26 +1,29 @@
-import { Router, Request, Response} from 'express';
+import { Router, Request, Response } from "express";
 
 const router = Router();
 
-router.post('/auth/login', (req: Request, res: Response) => {
-    res.json({
-        status: 'success',
-        message: 'auth successfully'
-    })
+router.post("/login", (req: Request, res: Response) => {
+  const { username, password } = req.body;
+  console.log(username, password);
+
+  res.json({
+    status: "success",
+    message: "auth successfully",
+  });
 });
 
-router.post('/auth/verify', (req: Request, res: Response) => {
-    res.json({
-        status: 'success',
-        message: 'verify successfully'
-    })
+router.post("/verify", (req: Request, res: Response) => {
+  res.json({
+    status: "success",
+    message: "verify successfully",
+  });
 });
 
-router.post('/auth/logout', (req: Request, res: Response) => {
-    res.json({
-        status: 'success',
-        message: 'logout successfully'
-    })
+router.post("/logout", (req: Request, res: Response) => {
+  res.json({
+    status: "success",
+    message: "logout successfully",
+  });
 });
 
 export default router;
