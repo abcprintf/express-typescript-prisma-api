@@ -6,7 +6,9 @@
   "scripts": {
     "start": "node src/app.ts",
     "dev": "concurrently \"tsc -w\" \"nodemon -q src/app.ts\" ",
-    "build": "npx tsc -p ."
+    "build": "npx tsc -p .",
+    "lint": "eslint src/**/*.ts",
+    "format": "eslint src/**/*.ts --fix"
   },
   "keywords": [
     "express",
@@ -36,9 +38,17 @@
     "@types/express": "^4.17.21",
     "@types/jsonwebtoken": "^9.0.5",
     "@types/node": "^20.10.4",
+    "@typescript-eslint/eslint-plugin": "^6.13.2",
+    "@typescript-eslint/parser": "^6.13.2",
     "concurrently": "^8.2.2",
+    "eslint": "^8.55.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-import": "^2.29.0",
+    "eslint-plugin-prettier": "^5.0.1",
     "nodemon": "^3.0.2",
+    "prettier": "^3.1.1",
     "prisma": "^5.7.0",
+    "ts-node": "^10.9.2",
     "typescript": "^5.3.3"
   },
   "engines": {
